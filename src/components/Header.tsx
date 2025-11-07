@@ -1,0 +1,90 @@
+import { Link } from "react-router-dom";
+import { Cpu, ShoppingCart, Search, Menu } from "lucide-react";
+import { Button } from "./ui/button";
+import { useState } from "react";
+
+export const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  return (
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
+      <div className="container mx-auto px-4">
+        <div className="flex h-16 items-center justify-between">
+          <Link to="/" className="flex items-center gap-2">
+            <div className="bg-gradient-to-br from-primary to-accent rounded-lg p-2">
+              <Cpu className="h-6 w-6 text-primary-foreground" />
+            </div>
+            <span className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              LM Hardware
+            </span>
+          </Link>
+
+          <nav className="hidden md:flex items-center gap-6">
+            <a href="#produtos" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+              Produtos
+            </a>
+            <a href="#pcs-montados" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+              PCs Montados
+            </a>
+            <a href="#categorias" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+              Categorias
+            </a>
+            <a href="#contato" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+              Contato
+            </a>
+          </nav>
+
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" size="icon" className="hidden md:flex">
+              <Search className="h-5 w-5" />
+            </Button>
+            <Button variant="ghost" size="icon">
+              <ShoppingCart className="h-5 w-5" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              <Menu className="h-5 w-5" />
+            </Button>
+          </div>
+        </div>
+
+        {isMenuOpen && (
+          <nav className="md:hidden py-4 space-y-2">
+            <a
+              href="#produtos"
+              className="block py-2 text-sm font-medium text-foreground hover:text-primary"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Produtos
+            </a>
+            <a
+              href="#pcs-montados"
+              className="block py-2 text-sm font-medium text-foreground hover:text-primary"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              PCs Montados
+            </a>
+            <a
+              href="#categorias"
+              className="block py-2 text-sm font-medium text-foreground hover:text-primary"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Categorias
+            </a>
+            <a
+              href="#contato"
+              className="block py-2 text-sm font-medium text-foreground hover:text-primary"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Contato
+            </a>
+          </nav>
+        )}
+      </div>
+    </header>
+  );
+};
