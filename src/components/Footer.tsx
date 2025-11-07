@@ -8,11 +8,11 @@ export const Footer = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <Link to="/" className="inline-flex items-center mb-4 group">
+            <Link to="/" className="inline-flex items-center mb-6 group">
               <img 
                 src={logo} 
                 alt="LM Hardware" 
-                className="h-14 md:h-16 w-auto transition-all duration-300 group-hover:scale-105 group-hover:brightness-110" 
+                className="h-20 md:h-24 w-auto transition-all duration-300 group-hover:scale-105 group-hover:brightness-110 drop-shadow-lg" 
               />
             </Link>
             <p className="text-sm text-muted-foreground mb-4">
