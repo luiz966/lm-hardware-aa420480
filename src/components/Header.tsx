@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import { Cpu, ShoppingCart, Search, Menu } from "lucide-react";
+import { ShoppingCart, Search, Menu } from "lucide-react";
 import { Button } from "./ui/button";
 import { useState } from "react";
+import logo from "@/assets/logo.png";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,13 +11,8 @@ export const Header = () => {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
-            <div className="bg-gradient-to-br from-primary to-accent rounded-lg p-2">
-              <Cpu className="h-6 w-6 text-primary-foreground" />
-            </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              LM Hardware
-            </span>
+          <Link to="/" className="flex items-center">
+            <img src={logo} alt="LM Hardware" className="h-12 w-auto" />
           </Link>
 
           <nav className="hidden md:flex items-center gap-6">

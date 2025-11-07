@@ -1,5 +1,6 @@
-import { Cpu, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import { Facebook, Instagram, Twitter, Youtube } from "lucide-react";
 import { Link } from "react-router-dom";
+import logo from "@/assets/logo.png";
 
 export const Footer = () => {
   return (
@@ -7,13 +8,8 @@ export const Footer = () => {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="bg-gradient-to-br from-primary to-accent rounded-lg p-2">
-                <Cpu className="h-6 w-6 text-primary-foreground" />
-              </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                LM Hardware
-              </span>
+            <Link to="/" className="flex items-center mb-4">
+              <img src={logo} alt="LM Hardware" className="h-16 w-auto" />
             </Link>
             <p className="text-sm text-muted-foreground mb-4">
               Sua loja especializada em hardware e periféricos. Oferecemos os melhores produtos com os melhores preços do mercado.
