@@ -11,8 +11,12 @@ export const Header = () => {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
-          <Link to="/" className="flex items-center">
-            <img src={logo} alt="LM Hardware" className="h-12 w-auto" />
+          <Link to="/" className="flex items-center group">
+            <img 
+              src={logo} 
+              alt="LM Hardware" 
+              className="h-10 md:h-12 w-auto transition-all duration-300 group-hover:scale-105 group-hover:brightness-110" 
+            />
           </Link>
 
           <nav className="hidden md:flex items-center gap-6">
