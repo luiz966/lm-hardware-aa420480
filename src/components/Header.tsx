@@ -3,9 +3,14 @@ import { ShoppingCart, Search, Menu } from "lucide-react";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import logo from "@/assets/logo.png";
+import { useCart } from "@/contexts/CartContext";
+import { CartModal } from "./CartModal";
+import { Badge } from "./ui/badge";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const { totalItems } = useCart();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
@@ -38,8 +43,21 @@ export const Header = () => {
             <Button variant="ghost" size="icon" className="hidden md:flex hover:bg-primary/10">
               <Search className="h-5 w-5" />
             </Button>
-            <Button variant="ghost" size="icon" className="hover:bg-primary/10">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="hover:bg-primary/10 relative"
+              onClick={() => setIsCartOpen(true)}
+            >
               <ShoppingCart className="h-5 w-5" />
+              {totalItems > 0 && (
+                <Badge 
+                  variant="destructive" 
+                  className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs"
+                >
+                  {totalItems}
+                </Badge>
+              )}
             </Button>
             <Button
               variant="ghost"
@@ -85,6 +103,7 @@ export const Header = () => {
           </nav>
         )}
       </div>
+      <CartModal open={isCartOpen} onOpenChange={setIsCartOpen} />
     </header>
   );
 };

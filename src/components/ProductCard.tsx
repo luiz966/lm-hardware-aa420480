@@ -2,12 +2,15 @@ import { Card, CardContent, CardFooter } from "./ui/card";
 import { Button } from "./ui/button";
 import { ShoppingCart } from "lucide-react";
 import { Product } from "@/data/products";
+import { useCart } from "@/contexts/CartContext";
 
 interface ProductCardProps {
   product: Product;
 }
 
 export const ProductCard = ({ product }: ProductCardProps) => {
+  const { addToCart } = useCart();
+
   return (
     <Card className="group overflow-hidden hover:shadow-lg transition-all duration-300">
       <div className="aspect-square overflow-hidden bg-muted">
@@ -28,7 +31,11 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         </div>
       </CardContent>
       <CardFooter className="p-4 pt-0">
-        <Button className="w-full" size="sm">
+        <Button 
+          className="w-full" 
+          size="sm"
+          onClick={() => addToCart(product)}
+        >
           <ShoppingCart className="mr-2 h-4 w-4" />
           Adicionar ao Carrinho
         </Button>
