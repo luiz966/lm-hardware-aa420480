@@ -12,7 +12,7 @@ export const Footer = () => {
               <img 
                 src={logo} 
                 alt="LM Hardware" 
-                className="h-28 md:h-36 w-auto transition-all duration-300 group-hover:scale-105 group-hover:brightness-110 drop-shadow-xl" 
+                className="h-36 md:h-48 w-auto transition-all duration-300 group-hover:scale-105 group-hover:brightness-110 drop-shadow-2xl" 
               />
             </Link>
             <p className="text-sm text-muted-foreground mb-4">
