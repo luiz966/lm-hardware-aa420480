@@ -7,10 +7,31 @@ import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { products, preBuiltPCs } from "@/data/products";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ProductFilters } from "@/components/ProductFilters";
+import { useProductFilters } from "@/hooks/useProductFilters";
+import { ArrowRight, SlidersHorizontal } from "lucide-react";
+import { useState } from "react";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 const Index = () => {
-  const featuredProducts = products.slice(0, 8);
+  const [showAllProducts, setShowAllProducts] = useState(false);
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  
+  const {
+    filters,
+    setFilters,
+    categories,
+    priceRange,
+    filteredProducts,
+  } = useProductFilters(products);
+
+  const featuredProducts = showAllProducts ? filteredProducts : products.slice(0, 8);
 
   return (
     <div className="min-h-screen">
@@ -22,18 +43,72 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h2 className="text-3xl font-bold mb-2">Produtos em Destaque</h2>
-              <p className="text-muted-foreground">Os melhores componentes para seu PC</p>
+              <h2 className="text-3xl font-bold mb-2">
+                {showAllProducts ? "Todos os Produtos" : "Produtos em Destaque"}
+              </h2>
+              <p className="text-muted-foreground">
+                {showAllProducts
+                  ? `${filteredProducts.length} ${filteredProducts.length === 1 ? "produto encontrado" : "produtos encontrados"}`
+                  : "Os melhores componentes para seu PC"}
+              </p>
             </div>
-            <Button variant="outline">
-              Ver Todos <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
+            <div className="flex gap-2">
+              {showAllProducts && (
+                <Sheet open={isFilterOpen} onOpenChange={setIsFilterOpen}>
+                  <SheetTrigger asChild>
+                    <Button variant="outline" size="sm">
+                      <SlidersHorizontal className="mr-2 h-4 w-4" />
+                      Filtros
+                    </Button>
+                  </SheetTrigger>
+                  <SheetContent side="left" className="w-[320px] sm:w-[400px] overflow-y-auto">
+                    <SheetHeader className="mb-6">
+                      <SheetTitle>Filtros de Produtos</SheetTitle>
+                    </SheetHeader>
+                    <ProductFilters
+                      filters={filters}
+                      onFiltersChange={setFilters}
+                      categories={categories}
+                      priceRange={priceRange}
+                    />
+                  </SheetContent>
+                </Sheet>
+              )}
+              <Button
+                variant={showAllProducts ? "secondary" : "outline"}
+                size="sm"
+                onClick={() => setShowAllProducts(!showAllProducts)}
+              >
+                {showAllProducts ? "Ver Destaques" : "Ver Todos"}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
+          
+          {showAllProducts && (
+            <div className="hidden lg:block mb-8">
+              <ProductFilters
+                filters={filters}
+                onFiltersChange={setFilters}
+                categories={categories}
+                priceRange={priceRange}
+              />
+            </div>
+          )}
+
+          {featuredProducts.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground text-lg">
+                Nenhum produto encontrado com os filtros selecionados.
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {featuredProducts.map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -56,17 +131,18 @@ const Index = () => {
 
       <Categories />
 
-      {/* Mais Produtos */}
-      <section className="py-16 bg-background">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold mb-8 text-center">Mais Produtos</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {products.slice(8).map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
+      {!showAllProducts && (
+        <section className="py-16 bg-background">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold mb-8 text-center">Mais Produtos</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {products.slice(8).map((product) => (
+                <ProductCard key={product.id} product={product} />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       <Contact />
       <Footer />
