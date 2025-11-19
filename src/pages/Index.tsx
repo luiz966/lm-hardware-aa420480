@@ -18,6 +18,13 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 const Index = () => {
   const [showAllProducts, setShowAllProducts] = useState(false);
@@ -32,6 +39,14 @@ const Index = () => {
   } = useProductFilters(products);
 
   const featuredProducts = showAllProducts ? filteredProducts : products.slice(0, 8);
+
+  const handleCategoryClick = (category: string) => {
+    setFilters({
+      ...filters,
+      category: category,
+    });
+    setShowAllProducts(true);
+  };
 
   return (
     <div className="min-h-screen">
@@ -113,33 +128,60 @@ const Index = () => {
       </section>
 
       {/* PCs Montados */}
-      <section id="pcs-montados" className="py-16 bg-muted/30">
+      <section id="pcs-montados" className="py-16 bg-gradient-to-br from-blue-light/50 via-background to-blue-light">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">PCs Gamer Montados</h2>
+            <h2 className="text-3xl font-bold mb-4 text-primary">PCs Gamer Montados</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Sistemas completos testados e otimizados, prontos para jogar. Todos com peças compatíveis e garantia de qualidade.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {preBuiltPCs.map((pc) => (
-              <PreBuiltCard key={pc.id} product={pc} />
-            ))}
-          </div>
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full max-w-6xl mx-auto"
+          >
+            <CarouselContent className="-ml-2 md:-ml-4">
+              {preBuiltPCs.map((pc) => (
+                <CarouselItem key={pc.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+                  <PreBuiltCard product={pc} />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="hidden md:flex" />
+            <CarouselNext className="hidden md:flex" />
+          </Carousel>
         </div>
       </section>
 
-      <Categories />
+      <Categories onCategoryClick={handleCategoryClick} />
 
       {!showAllProducts && (
         <section className="py-16 bg-background">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold mb-8 text-center">Mais Produtos</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {products.slice(8).map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
+            <h2 className="text-3xl font-bold mb-4 text-center text-primary">Mais Produtos</h2>
+            <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Explore nossa seleção completa de componentes e periféricos para seu setup
+            </p>
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-2 md:-ml-4">
+                {products.slice(8).map((product) => (
+                  <CarouselItem key={product.id} className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/4">
+                    <ProductCard product={product} />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="hidden md:flex" />
+              <CarouselNext className="hidden md:flex" />
+            </Carousel>
           </div>
         </section>
       )}
