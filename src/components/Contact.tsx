@@ -100,8 +100,8 @@ export const Contact = () => {
                     </div>
                     <div>
                       <p className="font-semibold">Telefone</p>
-                      <p className="text-sm text-muted-foreground">(11) 3000-0000</p>
-                      <p className="text-sm text-muted-foreground">(11) 99999-9999</p>
+                      <p className="text-sm text-muted-foreground">(45) 8008-6579</p>
+                      <p className="text-sm text-muted-foreground">(45) 99995-7890</p>
                     </div>
                   </div>
 
@@ -111,8 +111,7 @@ export const Contact = () => {
                     </div>
                     <div>
                       <p className="font-semibold">E-mail</p>
-                      <p className="text-sm text-muted-foreground">contato@lmhardware.com.br</p>
-                      <p className="text-sm text-muted-foreground">vendas@lmhardware.com.br</p>
+                      <p className="text-sm text-muted-foreground">LM.Hardware2025@gmail.com</p>
                     </div>
                   </div>
 
