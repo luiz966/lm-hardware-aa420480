@@ -61,6 +61,12 @@ export default {
           bg: "hsl(var(--hero-bg))",
           text: "hsl(var(--hero-text))",
         },
+        blue: {
+          light: "hsl(var(--blue-light))",
+          medium: "hsl(var(--blue-medium))",
+          dark: "hsl(var(--blue-dark))",
+          darker: "hsl(var(--blue-darker))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -84,10 +90,21 @@ export default {
             height: "0",
           },
         },
+        "fade-in": {
+          "0%": {
+            opacity: "0",
+            transform: "translateY(20px)"
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translateY(0)"
+          }
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "fade-in": "fade-in 0.6s ease-out",
       },
     },
   },
