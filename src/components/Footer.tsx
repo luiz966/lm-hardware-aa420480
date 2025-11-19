@@ -62,13 +62,18 @@ export const Footer = () => {
               <li>Segunda a Sexta: 9h às 18h</li>
               <li>Sábado: 9h às 13h</li>
               <li className="pt-2">
-                <a href="tel:1130000000" className="hover:text-primary transition-colors">
-                  (11) 3000-0000
+                <a href="tel:4580086579" className="hover:text-primary transition-colors">
+                  (45) 8008-6579
                 </a>
               </li>
               <li>
-                <a href="mailto:contato@lmhardware.com.br" className="hover:text-primary transition-colors">
-                  contato@lmhardware.com.br
+                <a href="tel:4599957890" className="hover:text-primary transition-colors">
+                  (45) 99995-7890
+                </a>
+              </li>
+              <li>
+                <a href="mailto:LM.Hardware2025@gmail.com" className="hover:text-primary transition-colors">
+                  LM.Hardware2025@gmail.com
                 </a>
               </li>
             </ul>
