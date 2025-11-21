@@ -3,6 +3,7 @@ import { Button } from "./ui/button";
 import { ShoppingCart } from "lucide-react";
 import { Product } from "@/data/products";
 import { useCart } from "@/contexts/CartContext";
+import { useNavigate } from "react-router-dom";
 
 interface ProductCardProps {
   product: Product;
@@ -10,17 +11,24 @@ interface ProductCardProps {
 
 export const ProductCard = ({ product }: ProductCardProps) => {
   const { addToCart } = useCart();
+  const navigate = useNavigate();
 
   return (
-    <Card className="group overflow-hidden hover:shadow-lg transition-all duration-300">
-      <div className="aspect-square overflow-hidden bg-muted">
+    <Card className="group overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer">
+      <div 
+        className="aspect-square overflow-hidden bg-muted"
+        onClick={() => navigate(`/produto/${product.id}`)}
+      >
         <img
           src={product.image}
           alt={product.name}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
         />
       </div>
-      <CardContent className="p-4">
+      <CardContent 
+        className="p-4 cursor-pointer"
+        onClick={() => navigate(`/produto/${product.id}`)}
+      >
         <p className="text-xs text-muted-foreground mb-1">{product.category}</p>
         <h3 className="font-semibold text-sm mb-2 line-clamp-2">{product.name}</h3>
         <p className="text-xs text-muted-foreground line-clamp-2 mb-3">{product.description}</p>
