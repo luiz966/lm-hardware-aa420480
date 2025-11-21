@@ -2,15 +2,23 @@ import { Card, CardContent, CardFooter } from "./ui/card";
 import { Button } from "./ui/button";
 import { ShoppingCart, Check } from "lucide-react";
 import { Product } from "@/data/products";
+import { useNavigate } from "react-router-dom";
+import { useCart } from "@/contexts/CartContext";
 
 interface PreBuiltCardProps {
   product: Product;
 }
 
 export const PreBuiltCard = ({ product }: PreBuiltCardProps) => {
+  const navigate = useNavigate();
+  const { addToCart } = useCart();
+
   return (
     <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300">
-      <div className="aspect-[4/3] overflow-hidden bg-muted relative">
+      <div 
+        className="aspect-[4/3] overflow-hidden bg-muted relative cursor-pointer"
+        onClick={() => navigate(`/produto/${product.id}`)}
+      >
         <img
           src={product.image}
           alt={product.name}
@@ -41,11 +49,18 @@ export const PreBuiltCard = ({ product }: PreBuiltCardProps) => {
         </div>
       </CardContent>
       <CardFooter className="p-6 pt-0 flex gap-2">
-        <Button className="flex-1">
+        <Button 
+          className="flex-1"
+          onClick={() => addToCart(product)}
+        >
           <ShoppingCart className="mr-2 h-4 w-4" />
           Comprar Agora
         </Button>
-        <Button variant="outline" className="flex-1">
+        <Button 
+          variant="outline" 
+          className="flex-1"
+          onClick={() => navigate(`/produto/${product.id}`)}
+        >
           Ver Detalhes
         </Button>
       </CardFooter>
