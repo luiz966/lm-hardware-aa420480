@@ -43,14 +43,13 @@ export const Hero = () => {
             >
               Ver Produtos <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="text-base border-2 border-blue-medium text-hero-text hover:bg-blue-medium/20 hover:border-accent transition-all duration-300"
-              onClick={() => scrollToSection('pcs-montados')}
-            >
-              PCs Montados
-            </Button>
+          <Button 
+            size="lg" 
+            className="text-base bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-0.5"
+            onClick={() => scrollToSection('pcs-montados')}
+          >
+            PCs Montados <ArrowRight className="ml-2 h-5 w-5" />
+          </Button>
           </div>
         </div>
       </div>
