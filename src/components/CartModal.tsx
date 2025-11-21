@@ -7,6 +7,7 @@ import {
 } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { useCart } from "@/contexts/CartContext";
+import { useNavigate } from "react-router-dom";
 import { Minus, Plus, Trash2, ShoppingBag } from "lucide-react";
 
 interface CartModalProps {
@@ -16,6 +17,7 @@ interface CartModalProps {
 
 export const CartModal = ({ open, onOpenChange }: CartModalProps) => {
   const { items, updateQuantity, removeFromCart, clearCart, totalPrice } = useCart();
+  const navigate = useNavigate();
 
   if (items.length === 0) {
     return (
@@ -111,7 +113,13 @@ export const CartModal = ({ open, onOpenChange }: CartModalProps) => {
             <Button variant="outline" onClick={clearCart} className="flex-1">
               Limpar Carrinho
             </Button>
-            <Button className="flex-1">
+            <Button 
+              className="flex-1"
+              onClick={() => {
+                onOpenChange(false);
+                navigate("/checkout");
+              }}
+            >
               Finalizar Compra
             </Button>
           </div>
