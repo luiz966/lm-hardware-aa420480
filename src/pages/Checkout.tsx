@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useToast } from "@/hooks/use-toast";
+import { ArrowLeft } from "lucide-react";
 import logo from "@/assets/logo-checkout.png";
 
 const estados = [
@@ -132,6 +133,15 @@ export default function Checkout() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-blue-dark/20 to-background py-8 px-4">
       <div className="max-w-4xl mx-auto bg-card rounded-2xl shadow-2xl p-8 animate-fade-in">
+        <Button
+          onClick={() => navigate("/")}
+          variant="ghost"
+          className="mb-4 hover:bg-primary/10"
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          Voltar para a Loja
+        </Button>
+        
         <img src={logo} alt="LM Hardware" className="mx-auto mb-6 max-w-[250px] h-auto rounded-lg" />
         
         <h1 className="text-3xl font-bold text-primary text-center mb-2">Fazer Pedido</h1>
