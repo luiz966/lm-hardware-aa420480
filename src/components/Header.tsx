@@ -1,16 +1,24 @@
 import { Link } from "react-router-dom";
-import { ShoppingCart, Search, Menu } from "lucide-react";
+import { ShoppingCart, Search, Menu, User, LogOut } from "lucide-react";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import logo from "@/assets/logo.png";
 import { useCart } from "@/contexts/CartContext";
+import { useAuth } from "@/contexts/AuthContext";
 import { CartModal } from "./CartModal";
 import { Badge } from "./ui/badge";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const { totalItems } = useCart();
+  const { user, signOut } = useAuth();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
@@ -59,6 +67,33 @@ export const Header = () => {
                 </Badge>
               )}
             </Button>
+            
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="hover:bg-primary/10">
+                    <User className="h-5 w-5" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem disabled className="font-medium">
+                    {user.user_metadata?.name || user.email}
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => signOut()} className="text-destructive">
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Sair
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Button asChild variant="ghost" className="hidden md:flex hover:bg-primary/10">
+                <Link to="/auth">
+                  <User className="mr-2 h-4 w-4" />
+                  Login
+                </Link>
+              </Button>
+            )}
+            
             <Button
               variant="ghost"
               size="icon"
@@ -100,6 +135,25 @@ export const Header = () => {
             >
               Contato
             </a>
+            {user ? (
+              <button
+                onClick={() => {
+                  signOut();
+                  setIsMenuOpen(false);
+                }}
+                className="block w-full text-left py-2 text-sm font-medium text-destructive hover:text-destructive/80"
+              >
+                Sair
+              </button>
+            ) : (
+              <Link
+                to="/auth"
+                className="block py-2 text-sm font-medium text-foreground hover:text-primary"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Login
+              </Link>
+            )}
           </nav>
         )}
       </div>
