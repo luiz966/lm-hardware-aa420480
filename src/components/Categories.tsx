@@ -2,12 +2,12 @@ import { Cpu, Monitor, Keyboard, HardDrive, MemoryStick, Box } from "lucide-reac
 import { Card } from "./ui/card";
 
 const categories = [
-  { name: "Processadores", icon: Cpu, color: "from-blue-dark via-primary to-blue-medium", category: "Processador" },
-  { name: "Placas de Vídeo", icon: Monitor, color: "from-accent via-blue-medium to-accent/80", category: "Placa de Vídeo" },
-  { name: "Memórias RAM", icon: MemoryStick, color: "from-primary via-blue-medium to-accent", category: "Memória RAM" },
+  { name: "Processadores", icon: Cpu, color: "from-blue-dark via-primary to-blue-medium", category: "Processadores" },
+  { name: "Placas de Vídeo", icon: Monitor, color: "from-accent via-blue-medium to-accent/80", category: "Placas de Vídeo" },
+  { name: "Memórias RAM", icon: MemoryStick, color: "from-primary via-blue-medium to-accent", category: "Memórias" },
   { name: "Armazenamento", icon: HardDrive, color: "from-accent via-primary to-blue-dark", category: "Armazenamento" },
-  { name: "Periféricos", icon: Keyboard, color: "from-blue-dark via-accent to-primary", category: "Periférico" },
-  { name: "Gabinetes", icon: Box, color: "from-blue-medium via-primary to-accent", category: "Gabinete" },
+  { name: "Periféricos", icon: Keyboard, color: "from-blue-dark via-accent to-primary", category: "Periféricos" },
+  { name: "Gabinetes", icon: Box, color: "from-blue-medium via-primary to-accent", category: "Gabinetes" },
 ];
 
 interface CategoriesProps {
